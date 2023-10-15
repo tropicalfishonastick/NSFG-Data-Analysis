@@ -6,24 +6,14 @@ from collections import defaultdict
 
 def read_fem_preg(dct_file='2013_2015_FemPregSetup.dct',
                 dat_file='2013_2015_FemPregData.dat.gz'):
-    """Reads the NSFG pregnancy data.
-
-    dct_file: string file name
-    dat_file: string file name
-
-    returns: DataFrame
-    """
+    
     dct = stat1.read_stata_dct(dct_file)
     df_preg = dct.read_fixed_width(dat_file, compression='gzip')
     clean_fem_preg(df_preg)
     return df_preg
 
 def clean_fem_preg(df_preg):
-    """Recodes variables from the pregnancy frame.
-
-    df: DataFrame
-    """
-
+    
     # Check if 'birthwgt_lb1' column exists in the DataFrame
     if 'birthwgt_lb1' not in df_preg.columns:
         print("Error: 'birthwgt_lb1' column not found in the DataFrame.")
@@ -56,13 +46,7 @@ def clean_fem_preg(df_preg):
 def read_fem_resp(dct_file='2013_2015_FemRespSetup.dct',
                   dat_file='2013_2015_FemRespData.dat.gz',
                   nrows=None):
-    """Reads the NSFG respondent data.
-
-    dct_file: string file name
-    dat_file: string file name
-
-    returns: DataFrame
-    """
+    
     dct = stat1.read_stata_dct(dct_file)
     df_resp = dct.read_fixed_width(dat_file, compression='gzip', nrows=nrows)
     clean_fem_resp(df_resp)
